@@ -1,0 +1,142 @@
+/* 1. Definisikan Palet Warna (Sesuai diskusi) */
+:root {
+    --main-green: #2bae00;
+    --light-green: #76c800;
+    --pale-white: #f9f9f9;
+    --light-gray: #f4f4f4;
+    --accent-blue: #4fa3f7;
+    --text-main: #333333;
+    --text-secondary: #777777;
+    --error-red: #d9534f;
+    --success-green: #5cb85c;
+}
+
+/* 2. Global & Body Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Pastikan kamu import Poppins di HTML */
+    background-color: var(--light-gray);
+    color: var(--text-main);
+    /* Ini trik untuk layout 'island' di tengah */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* 3. Layout "Island" (Container Auth) */
+.auth-container {
+    background-color: var(--pale-white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.auth-logo {
+    width: 80px; /* Ukuran logo UPNVJ */
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.auth-container h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.auth-container .subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* 4. Styling Form */
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--main-green);
+    box-shadow: 0 0 0 2px rgba(43, 174, 0, 0.2);
+}
+
+/* 5. Tombol */
+.auth-button {
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--pale-white);
+    background-color: var(--main-green);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: var(--light-green);
+}
+
+/* 6. Link & Pesan */
+.auth-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.auth-link a {
+    color: var(--accent-blue);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* 7. Pesan Error/Sukses */
+.message {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.message.error {
+    background-color: #fdd;
+    color: var(--error-red);
+    border: 1px solid var(--error-red);
+}
+.message.success {
+    background-color: #e6f7e6;
+    color: var(--success-green);
+    border: 1px solid var(--success-green);
+}
