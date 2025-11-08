@@ -1,0 +1,218 @@
+:root {
+    --main-green: #2bae00;
+    --light-green: #76c800;
+    --pale-white: #f9f9f9;
+    --light-gray: #f4f4f4;
+    --accent-blue: #4fa3f7;
+    --text-main: #333333;
+    --text-secondary: #777777;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: var(--pale-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--main-green);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-blue);
+}
+
+.nav-links .user-name {
+    color: var(--text-main);
+    font-weight: 400;
+    margin-right: -10px; 
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: var(--accent-blue);
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.logout-button:hover {
+    color: var(--main-green);
+}
+
+.container {
+    padding: 1.5rem 5%;
+    max-width: 1400px;
+    margin: 0 auto; 
+}
+
+.page-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+}
+
+.store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.store-card {
+    background-color: var(--pale-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; 
+    flex-direction: column; 
+}
+
+.store-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+    width: 100%;
+    height: 160px;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+}
+
+.card-content {
+    padding: 1rem;
+    flex-grow: 1; 
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.card-location {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.card-button {
+    display: block; 
+    text-align: center;
+    text-decoration: none;
+    padding: 0.6rem 1rem;
+    margin: 1rem; 
+    border-radius: 5px;
+    font-weight: 600;
+    
+    background-color: transparent;
+    color: var(--main-green);
+    border: 2px solid var(--main-green);
+    transition: all 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: var(--light-green);
+    border-color: var(--light-green);
+    color: var(--pale-white);
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-main);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: 0;
+        top: 65px; 
+        height: auto;
+        background-color: var(--pale-white);
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+        box-shadow: 0 8px 10px rgba(0,0,0,0.1);
+        
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    
+    .nav-links li {
+        margin: 0;
+        width: 100%;
+    }
+    
+    .nav-links a, .nav-links .user-name {
+        display: block;
+        padding: 1rem;
+        text-align: center;
+        margin: 0;
+    }
+    .nav-links .logout-button {
+        padding: 1rem;
+        width: 100%;
+    }
+    
+    .burger {
+        display: block;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%);
+}
