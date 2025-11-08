@@ -102,4 +102,8 @@ Anda dapat membuat akun baru atau menggunakan data dummy untuk login.
 
 Tugas UAS Pemrograman Web
 
-**Oleh: Muhammad Sayyid Rafee' Djamil**
+**Oleh:**
+* Muhammad Sayyid Rafee' Djamil
+* Rafael Ananta Razid
+* Damar Kusumawardhani
+* Fani Dwi Ariyanti
