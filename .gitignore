@@ -1,0 +1,46 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Ignore virtual environments
+venv/
+env/
+ENV/
+
+# Ignore IDE configuration files (VS Code, PyCharm, etc.)
+.vscode/
+.idea/
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Node.js modules
+node_modules/
+
+# Ignore package lock files (npm, yarn)
+package-lock.json
+yarn.lock
+
+# Ignore build and distribution files
+dist/
+build/
+*.egg-info/
+
+# Ignore logs
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore database files (optional, if you don't want to track local DBs)
+*.sqlite3
+*.db
+
+# Ignore environment variables (for sensitive data like .env files)
+.env
+.env.local
+.env.*.local
