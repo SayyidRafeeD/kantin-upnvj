@@ -1,16 +1,5 @@
 <?php
-// Mulai session di paling atas
-session_start();
 
-// CEK SESI: PENGAMANAN HALAMAN
-// Jika 'user_id' tidak ada di session, berarti user belum login
-if (!isset($_SESSION['user_id'])) {
-    // Tendang user ke halaman login
-    header("Location: login.php");
-    exit(); // Pastikan script berhenti setelah redirect
-}
-
-// Ambil nama user dari session untuk ditampilkan
 $full_name = $_SESSION['full_name'] ?? 'Pengguna';
 
 ?>
@@ -19,7 +8,7 @@ $full_name = $_SESSION['full_name'] ?? 'Pengguna';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Kantin UPNVJ</title>
+    <title><?php echo htmlspecialchars($pageTitle ?? 'Kantin UPNVJ'); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">

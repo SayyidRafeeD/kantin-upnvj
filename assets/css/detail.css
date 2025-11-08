@@ -1,0 +1,135 @@
+.store-detail-container {
+    background-color: var(--pale-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.store-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.store-header-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.store-info {
+    padding: 1.5rem 2rem;
+}
+
+.store-info h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.store-info .location {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.store-info .description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.vote-area {
+    background-color: var(--light-gray);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+
+.vote-count {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.vote-count strong {
+    font-size: 1.5rem;
+    color: var(--main-green);
+}
+
+.vote-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--pale-white);
+    background-color: var(--main-green);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.vote-button:hover {
+    background-color: var(--light-green);
+}
+
+.vote-button:disabled {
+    background-color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+.menu-container {
+    padding: 1.5rem 2rem;
+    background-color: #ffffff;
+}
+
+.menu-container h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: 0.5rem;
+}
+
+.menu-list {
+    list-style: none;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.menu-item .item-name {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.menu-item .item-price {
+    font-weight: 600;
+    color: var(--main-green);
+    background-color: #e6f7e6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+}
+
+@media (min-width: 769px) {
+    .store-header-image {
+        height: 350px;
+    }
+    
+    .store-detail-grid {
+        grid-template-columns: 2fr 3fr;
+    }
+    
+    .menu-container {
+        border-left: 1px solid var(--light-gray);
+    }
+}
