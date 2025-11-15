@@ -23,5 +23,3 @@ VALUES
     
     (3, 'Paket Geprek Level 3', 17000.00),
     (3, 'Paket Geprek Leleh Keju', 20000.00);
-
-SELECT 'Data dummy berhasil dimasukkan!' AS status;
