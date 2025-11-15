@@ -22,4 +22,5 @@ VALUES
     (2, 'Donat Coklat', 8000.00),
     
     (3, 'Paket Geprek Level 3', 17000.00),
-    (3, 'Paket Geprek Leleh Keju', 20000.00);
+    (3, 'Paket Geprek Leleh Keju', 20000.00),
+    (1, 'Langganan 8 Semester', 20000000.00);
