@@ -37,6 +37,10 @@ require 'includes/header.php';
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <div class="form-group">
+                <label for="password_confirm">Konfirmasi Password</label>
+                <input type="password" id="password_confirm" name="password_confirm" required>
+            </div>
             <button type="submit" class="auth-button">Daftar</button>
         </form>
         <p class="auth-footer-text">
