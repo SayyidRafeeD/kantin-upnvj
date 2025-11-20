@@ -20,7 +20,7 @@ $user_id = $_SESSION['user_id'];
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['store_id'])) {
 
     $store_id = (int)$_POST['store_id'];
-    $today = date('Y-m-d'); 
+    $today = date('Y-m-d');
 
     try {
         $stmt_check = $conn->prepare("SELECT vote_id FROM votes WHERE user_id = ? AND store_id = ? AND vote_date = ?");
