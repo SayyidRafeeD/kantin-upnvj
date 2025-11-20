@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const storeId = document.getElementById('store-id-hidden').value;
+    console.log('Detail JS Loaded!');
+
+    const storeIdInput = document.getElementById('store-id-hidden');
+    if (!storeIdInput) {
+        console.error('Error: Hidden input store-id tidak ditemukan!');
+        return;
+    }
+    const storeId = storeIdInput.value;
+    console.log('Store ID:', storeId);
 
     initVoteSystem(storeId);
     initCommentSystem(storeId);
@@ -32,13 +40,11 @@ const initVoteSystem = (storeId) => {
 
             if (result.success) {
                 voteButton.textContent = 'Vote Masuk!';
-                voteButton.classList.add('voted-today'); // Bisa distyling css
+                voteButton.classList.add('voted-today');
                 voteCountEl.textContent = result.new_vote_count;
-
                 setTimeout(() => {
                     voteButton.textContent = 'Vote Lagi Besok';
                 }, 1500);
-
             } else {
                 voteButton.textContent = 'Gagal';
                 voteButton.disabled = false;
@@ -65,17 +71,15 @@ const initCommentSystem = (storeId) => {
     const charCount = document.getElementById('char-count');
     const commentsList = document.getElementById('comments-list');
 
+    console.log('Memulai sistem komentar...');
+
     loadComments(storeId, commentsList);
 
     if (commentInput) {
         commentInput.addEventListener('input', (e) => {
             const currentLength = e.target.value.length;
             charCount.textContent = `${currentLength}/200`;
-            if (currentLength >= 200) {
-                charCount.style.color = 'red';
-            } else {
-                charCount.style.color = '#777';
-            }
+            charCount.style.color = currentLength >= 200 ? 'red' : '#777';
         });
     }
 
@@ -103,14 +107,14 @@ const initCommentSystem = (storeId) => {
                 if (result.success) {
                     commentInput.value = '';
                     charCount.textContent = '0/200';
-                    loadComments(storeId, commentsList);
+                    loadComments(storeId, commentsList); // Reload list
                 } else {
                     alert(result.message);
                 }
 
             } catch (error) {
                 console.error('Error posting comment:', error);
-                alert('Gagal mengirim komentar. Cek koneksi internet.');
+                alert('Gagal mengirim komentar.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalBtnText;
@@ -126,9 +130,11 @@ const loadComments = async (storeId, listContainer) => {
 
         if (result.success) {
             renderComments(result.data, listContainer);
+        } else {
+            listContainer.innerHTML = '<p class="no-comments">Gagal memuat data.</p>';
         }
     } catch (error) {
-        console.error('Gagal memuat komentar:', error);
+        console.error('Fetch Error:', error);
         listContainer.innerHTML = '<p class="no-comments">Gagal memuat komentar.</p>';
     }
 };
@@ -143,6 +149,7 @@ const renderComments = (comments, container) => {
 
     comments.forEach(comment => {
         const dateStr = timeAgo(comment.created_at);
+
         const safeName = escapeHTML(comment.full_name);
         const safeText = escapeHTML(comment.comment_text);
 
@@ -161,17 +168,8 @@ const renderComments = (comments, container) => {
     });
 };
 
-const escapeHTML = (str) => {
-    if (!str) return '';
-    return str.replace(/[&<>"']/g, (match) => {
-        const escape = {
-            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-        };
-        return escape[match];
-    });
-};
-
 const timeAgo = (dateString) => {
+    if (!dateString) return '';
     const date = new Date(dateString.replace(' ', 'T'));
     const now = new Date();
     const seconds = Math.floor((now - date) / 1000);
