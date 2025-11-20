@@ -28,7 +28,7 @@ require 'includes/header.php';
                 </div>
             </div>
 
-            <form id="login-form" class="auth-form"> 
+            <form id="login-form" class="auth-form">
                 <div class="form-group">
                     <label for="nim">NIM</label>
                     <input type="text" id="nim" name="nim" required>
