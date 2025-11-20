@@ -132,3 +132,89 @@ body {
     color: var(--success-green);
     border: 1px solid var(--success-green);
 }
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    opacity: 0.6;
+}
+
+.password-requirements {
+    list-style: none;
+    margin-top: 8px;
+    padding: 0;
+    text-align: left;
+}
+
+.password-requirements li {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 2px;
+    transition: color 0.3s;
+}
+
+.password-requirements li.invalid {
+    color: #d9534f;
+}
+
+.password-requirements li.valid {
+    color: var(--main-green);
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.popup-content.error {
+    border-top: 5px solid var(--error-red);
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px; right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #aaa;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.3s ease-in-out;
+}
