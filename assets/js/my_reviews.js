@@ -46,18 +46,22 @@ const renderReviews = (reviews) => {
 
         const editedLabel = review.updated_at ? '<small style="font-style:italic; color:#aaa;">(diedit)</small>' : '';
 
+        const safeStoreName = escapeHTML(review.store_name);
+        const safeComment = escapeHTML(review.comment_text);
+        const safeImage = escapeHTML(review.image_url);
+
         card.innerHTML = `
             <div class="review-img-wrapper">
-                <img src="${escapeHTML(review.image_url)}" class="review-img" alt="Store">
+                <img src="${safeImage}" class="review-img" alt="Store">
             </div>
             <div class="review-content">
                 <div class="review-header">
                     <a href="store.php?id=${review.store_id}" class="store-name-link">
-                        ${escapeHTML(review.store_name)}
+                        ${safeStoreName}
                     </a>
                     <span class="review-date">${dateStr}</span>
                 </div>
-                <div class="review-text" id="text-${review.comment_id}">${escapeHTML(review.comment_text)}</div>
+                <div class="review-text" id="text-${review.comment_id}">${safeComment}</div>
                 ${editedLabel}
                 <div class="review-actions">
                     <button class="btn-action btn-edit" onclick="openEditModal(${review.comment_id})">Edit</button>
@@ -113,9 +117,11 @@ window.closeEditModal = () => {
     currentEditId = null;
 };
 
-modalInput.addEventListener('input', (e) => {
-    charCount.innerText = `${e.target.value.length}/200`;
-});
+if (modalInput) {
+    modalInput.addEventListener('input', (e) => {
+        charCount.innerText = `${e.target.value.length}/200`;
+    });
+}
 
 window.saveEdit = async () => {
     const newText = modalInput.value.trim();
@@ -146,9 +152,4 @@ window.saveEdit = async () => {
         saveBtn.innerText = 'Simpan Perubahan';
         saveBtn.disabled = false;
     }
-};
-
-const escapeHTML = (str) => {
-    if (!str) return '';
-    return str.replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
 };
