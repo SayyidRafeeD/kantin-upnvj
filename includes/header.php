@@ -13,20 +13,23 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    
+
     <?php
-    if (basename($_SERVER['PHP_SELF']) == 'store.php') {
+    // Conditional Loading CSS
+    $currentPage = basename($_SERVER['PHP_SELF']);
+
+    if ($currentPage == 'store.php') {
         echo '<link rel="stylesheet" href="assets/css/detail.css">';
-    }
-    
-    if (basename($_SERVER['PHP_SELF']) == 'login.php' || basename($_SERVER['PHP_SELF']) == 'register.php') {
+    } elseif ($currentPage == 'login.php' || $currentPage == 'register.php') {
         echo '<link rel="stylesheet" href="assets/css/auth.css">';
+    } elseif ($currentPage == 'my_reviews.php') {
+        echo '<link rel="stylesheet" href="assets/css/my_reviews.css">';
     }
     ?>
 </head>
 <body>
-    
-    <?php if (!in_array(basename($_SERVER['PHP_SELF']), ['login.php', 'register.php'])): ?>
+
+<?php if (!in_array($currentPage, ['login.php', 'register.php'])): ?>
     <header>
         <nav class="navbar">
             <a href="index.php" class="nav-logo">
@@ -36,7 +39,8 @@ if (session_status() === PHP_SESSION_NONE) {
             <ul class="nav-links">
                 <li><a href="index.php">Home</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><a href="my_reviews.php">Ulasan Saya</a></li>
+                    <li><a href="logout.php" style="color: #d9534f;">Logout</a></li>
                 <?php else: ?>
                     <li><a href="login.php">Login</a></li>
                 <?php endif; ?>
@@ -48,6 +52,6 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
         </nav>
     </header>
-    <?php endif; ?>
-    
-    <main class="container">
+<?php endif; ?>
+
+<main class="container">
