@@ -18,31 +18,44 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['store_id'])) {
-    
+
     $store_id = (int)$_POST['store_id'];
-    
+    $today = date('Y-m-d'); 
+
     try {
-        $stmt_insert = $conn->prepare("INSERT INTO votes (user_id, store_id) VALUES (?, ?)");
-        $stmt_insert->bind_param("ii", $user_id, $store_id);
-        
-        if ($stmt_insert->execute()) {
-            $response['success'] = true;
-            $response['message'] = 'Terima kasih! Vote Anda telah dicatat.';
+        $stmt_check = $conn->prepare("SELECT vote_id FROM votes WHERE user_id = ? AND store_id = ? AND vote_date = ?");
+        $stmt_check->bind_param("iis", $user_id, $store_id, $today);
+        $stmt_check->execute();
+        $stmt_check->store_result();
+
+        if ($stmt_check->num_rows > 0) {
+            $response['message'] = 'Anda sudah memberikan suara untuk toko ini hari ini. Coba lagi besok!';
+            $stmt_check->close();
         } else {
-            $response['message'] = 'Gagal vote: Anda sudah pernah vote toko ini.';
+            $stmt_check->close();
+
+            $stmt_insert = $conn->prepare("INSERT INTO votes (user_id, store_id, vote_date) VALUES (?, ?, ?)");
+            $stmt_insert->bind_param("iis", $user_id, $store_id, $today);
+
+            if ($stmt_insert->execute()) {
+                $response['success'] = true;
+                $response['message'] = 'Terima kasih! Vote Anda hari ini telah dicatat.';
+            } else {
+                $response['message'] = 'Gagal vote: Anda sudah vote hari ini.';
+            }
+            $stmt_insert->close();
         }
-        $stmt_insert->close();
-        
+
         $stmt_count = $conn->prepare("SELECT COUNT(vote_id) as total_votes FROM votes WHERE store_id = ?");
         $stmt_count->bind_param("i", $store_id);
         $stmt_count->execute();
         $response['new_vote_count'] = $stmt_count->get_result()->fetch_assoc()['total_votes'];
         $stmt_count->close();
-        
+
     } catch (Exception $e) {
         $response['message'] = 'Error DB: ' . $e->getMessage();
     }
-    
+
 } else {
     $response['message'] = 'Request tidak valid.';
 }

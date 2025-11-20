@@ -5,7 +5,7 @@ CREATE TABLE `users` (
   `user_id` INT AUTO_INCREMENT PRIMARY KEY,
   `nim` VARCHAR(50) NOT NULL UNIQUE,
   `full_name` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(255) NOT NULL 
+  `password` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE `canteens` (
@@ -19,7 +19,7 @@ CREATE TABLE `stores` (
   `canteen_id` INT NOT NULL,
   `store_name` VARCHAR(100) NOT NULL,
   `description` TEXT NULL,
-  `image_url` VARCHAR(255) NULL, 
+  `image_url` VARCHAR(255) NULL,
   FOREIGN KEY (`canteen_id`) REFERENCES `canteens`(`canteen_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -35,12 +35,25 @@ CREATE TABLE `votes` (
   `vote_id` INT AUTO_INCREMENT PRIMARY KEY,
   `user_id` INT NOT NULL,
   `store_id` INT NOT NULL,
+  `vote_date` DATE NOT NULL DEFAULT (CURRENT_DATE),
   `vote_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
   FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
   FOREIGN KEY (`store_id`) REFERENCES `stores`(`store_id`) ON DELETE CASCADE,
-  UNIQUE KEY `user_store_vote` (`user_id`, `store_id`)
+
+  UNIQUE KEY `daily_vote_limit` (`user_id`, `store_id`, `vote_date`)
 ) ENGINE=InnoDB;
 
+CREATE TABLE `comments` (
+  `comment_id` INT AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT NOT NULL,
+  `store_id` INT NOT NULL,
+  `comment_text` TEXT NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`store_id`) REFERENCES `stores`(`store_id`) ON DELETE CASCADE
+) ENGINE=InnoDB;
 
 CREATE TABLE `login_logs` (
   `log_id` INT AUTO_INCREMENT PRIMARY KEY,

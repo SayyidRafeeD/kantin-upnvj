@@ -28,7 +28,6 @@ VALUES
     (1, 'Kantin Pak Tris', 'Warung kesembilan belas', './assets/images/stores/kantin-ponlab-19.jpeg'),
     (1, 'Kantin yang ada terus', 'Warung kedua puluh', './assets/images/stores/kantin-ponlab-20.jpeg');
 
-
 INSERT INTO `menu_items` (`store_id`, `item_name`, `price`)
 VALUES
     (1, 'Nasi Rawon', 20000.00),
@@ -286,8 +285,8 @@ VALUES
     (15, 'Indomie Doble + Telor', 15000.00),
     (15, 'Indomie Becek + Telor', 12000.00),
     (15, 'Soto Ayam + Nasi', 15000.00),
-    (15, 'Dimsum'),
-    (15, 'Gorengan'),
+    (15, 'Dimsum', 10000.00),
+    (15, 'Gorengan', 3000.00),
     (15, 'Es Teh Manis', 3000.00),
 
     (16, 'Dimsum', 10000.00),
