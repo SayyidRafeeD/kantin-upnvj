@@ -29,7 +29,7 @@ require 'includes/header.php';
 
             <hr style="border: 0; border-top: 1px solid #eee; margin: 2rem 0;">
 
-            <h3 style="margin-bottom: 1rem;">Tim Pengembang</h3>
+            <h3 style="margin-bottom: 1rem;">Tim Kami</h3>
             <ul style="list-style: none;">
                 <li>👨‍💻 Muhammad Sayyid Rafee' Djamil</li>
                 <li>👨‍💻 Rafael Ananta Razid</li>
