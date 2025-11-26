@@ -6,6 +6,8 @@
     --accent-blue: #4fa3f7;
     --text-main: #333333;
     --text-secondary: #777777;
+    --footer-bg: #1a1a1a;
+    --footer-text: #bbbbbb;
 }
 
 * {
@@ -19,6 +21,13 @@ body {
     background-color: var(--light-gray);
     color: var(--text-main);
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main.container {
+    flex: 1;
 }
 
 .navbar {
@@ -38,13 +47,14 @@ body {
     font-weight: 700;
     color: var(--main-green);
     text-decoration: none;
-;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .nav-logo img {
     height: 40px;
     width: 40px;
-    vertical-align: middle;
 }
 
 .nav-links {
@@ -71,6 +81,7 @@ body {
     padding: 1.5rem 5%;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .page-title {
@@ -327,6 +338,100 @@ body {
 }
 .burger.toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.site-footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding-top: 3rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+    border-top: 5px solid var(--main-green);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    padding-bottom: 2rem;
+}
+
+.footer-section h3 {
+    color: white;
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--main-green);
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--main-green);
+}
+
+.footer-logo img {
+    height: 35px;
+    width: auto;
+}
+
+.footer-desc {
+    line-height: 1.6;
+    color: #999;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul a {
+    color: var(--footer-text);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footer-section ul a:hover {
+    color: var(--main-green);
+    padding-left: 5px;
+}
+
+.campus-badge {
+    display: inline-block;
+    background: #333;
+    color: #eee;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.footer-bottom {
+    border-top: 1px solid #333;
+    text-align: center;
+    padding: 1.5rem 0;
+    color: #777;
+    font-size: 0.85rem;
 }
 
 @media screen and (max-width: 768px) {
