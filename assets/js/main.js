@@ -14,49 +14,74 @@ const handleSearchAndSort = () => {
     const searchInput = document.getElementById('search-input');
     const sortSelect = document.getElementById('sort-select');
     const gridContainer = document.getElementById('store-grid-container');
+    const paginationContainer = document.getElementById('pagination-container');
     const noResultsMessage = document.getElementById('no-results-message');
 
     if (!searchForm) return;
 
-    const fetchData = async () => {
+    let currentPage = 1;
+
+    const fetchData = async (page = 1) => {
         const query = searchInput.value;
         const sort = sortSelect.value;
+        currentPage = page; // Update state
+
+        gridContainer.style.opacity = '0.5';
 
         try {
-            const response = await fetch(`api/search_stores.php?query=${encodeURIComponent(query)}&sort=${sort}`);
+            const response = await fetch(`api/search_stores.php?query=${encodeURIComponent(query)}&sort=${sort}&page=${page}`);
             const result = await response.json();
+
+            gridContainer.style.opacity = '1';
 
             if (result.success && result.data.length > 0) {
                 renderResults(result.data);
+                renderPagination(result.pagination);
+
                 gridContainer.style.display = 'grid';
+                paginationContainer.style.display = 'flex';
                 if (noResultsMessage) noResultsMessage.style.display = 'none';
             } else {
                 gridContainer.style.display = 'none';
+                paginationContainer.style.display = 'none';
                 if (noResultsMessage) noResultsMessage.style.display = 'block';
             }
         } catch (error) {
             console.error(error);
+            gridContainer.style.opacity = '1';
         }
     };
 
     const renderResults = (stores) => {
         gridContainer.innerHTML = '';
         stores.forEach(store => {
+            const safeImage = escapeHTML(store.image_url);
+            const safeName = escapeHTML(store.store_name);
+            const safeCanteen = escapeHTML(store.canteen_name);
+            const safeUrl = escapeHTML(store.detail_url);
+
             const storeCard = `
             <article class="store-card">
                 <div class="card-image-wrapper">
-                    <img src="${escapeHTML(store.image_url)}" 
-                         alt="${escapeHTML(store.store_name)}" 
+                    <img src="${safeImage}" 
+                         alt="${safeName}" 
                          class="card-image"
                          loading="lazy"
                          onerror="this.src='https://placehold.co/400x250/ddd/777?text=Error+Load';">
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">${escapeHTML(store.store_name)}</h3>
-                    <p class="card-location">${escapeHTML(store.canteen_name)}</p>
+                    <h3 class="card-title">${safeName}</h3>
+                    <p class="card-location">${safeCanteen}</p>
                     <div class="card-footer">
-                        <span class="card-votes">${store.total_votes} suara</span>
-                        <a href="${escapeHTML(store.detail_url)}" class="card-button">Lihat Menu</a>
+                        <div class="card-stats">
+                            <span class="stat-item" title="Jumlah Vote">
+                                👍 ${store.total_votes}
+                            </span>
+                            <span class="stat-item" title="Jumlah Komentar">
+                                💬 ${store.total_comments}
+                            </span>
+                        </div>
+                        <a href="${safeUrl}" class="card-button">Lihat Menu</a>
                     </div>
                 </div>
             </article>
@@ -65,18 +90,51 @@ const handleSearchAndSort = () => {
         });
     };
 
+    const renderPagination = (meta) => {
+        paginationContainer.innerHTML = '';
+
+        if (meta.total_pages <= 1) return;
+
+        const prevBtn = document.createElement('button');
+        prevBtn.innerText = '« Prev';
+        prevBtn.className = 'page-btn';
+        prevBtn.disabled = meta.current_page === 1;
+        prevBtn.onclick = () => {
+            fetchData(meta.current_page - 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        paginationContainer.appendChild(prevBtn);
+
+        const info = document.createElement('span');
+        info.className = 'page-info';
+        info.innerText = `${meta.current_page} / ${meta.total_pages}`;
+        paginationContainer.appendChild(info);
+
+        const nextBtn = document.createElement('button');
+        nextBtn.innerText = 'Next »';
+        nextBtn.className = 'page-btn';
+        nextBtn.disabled = meta.current_page === meta.total_pages;
+        nextBtn.onclick = () => {
+            fetchData(meta.current_page + 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        paginationContainer.appendChild(nextBtn);
+    };
+
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        fetchData();
+        fetchData(1);
     });
 
     searchInput.addEventListener('keyup', (e) => {
-        fetchData();
+        fetchData(1);
     });
 
     sortSelect.addEventListener('change', () => {
-        fetchData();
+        fetchData(1);
     });
+
+    fetchData(1);
 };
 
 const handleLogin = () => {
@@ -140,10 +198,21 @@ const handleRegisterValidation = () => {
 
     const validatePassword = () => {
         const val = passInput.value;
-
         const hasLen = val.length >= 8;
         const hasNum = /[0-9]/.test(val);
         const hasLet = /[A-Za-z]/.test(val);
+
+        const updateClass = (el, isValid) => {
+            if (isValid) {
+                el.classList.remove('invalid');
+                el.classList.add('valid');
+                el.innerHTML = '&#10003; ' + el.innerText.replace('✓ ', '').replace('✗ ', '');
+            } else {
+                el.classList.remove('valid');
+                el.classList.add('invalid');
+                el.innerHTML = '✗ ' + el.innerText.replace('✓ ', '').replace('✗ ', '');
+            }
+        };
 
         updateClass(reqLen, hasLen);
         updateClass(reqNum, hasNum);
@@ -164,7 +233,6 @@ const handleRegisterValidation = () => {
             matchMsg.style.display = 'none';
         }
 
-        // Enable/Disable Button
         if (hasLen && hasNum && hasLet && isMatch) {
             btnRegister.disabled = false;
             btnRegister.style.opacity = 1;
@@ -174,22 +242,9 @@ const handleRegisterValidation = () => {
         }
     };
 
-    const updateClass = (el, isValid) => {
-        if (isValid) {
-            el.classList.remove('invalid');
-            el.classList.add('valid');
-            el.innerHTML = '&#10003; ' + el.innerText.replace('✓ ', '').replace('✗ ', '');
-        } else {
-            el.classList.remove('valid');
-            el.classList.add('invalid');
-            el.innerHTML = '✗ ' + el.innerText.replace('✓ ', '').replace('✗ ', '');
-        }
-    };
-
     passInput.addEventListener('input', validatePassword);
     confirmInput.addEventListener('input', validatePassword);
 };
-
 
 window.togglePassword = (id) => {
     const input = document.getElementById(id);
