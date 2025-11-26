@@ -4,30 +4,33 @@
   <img src="assets/images/logo.png" alt="Logo UPNVJ" width="150">
 </p>
 
-Aplikasi web sederhana yang berfungsi sebagai direktori kantin di UPN "Veteran" Jakarta. Dibuat untuk memenuhi Tugas Akhir Ujian Akhir Semester (UAS) mata kuliah **Pemrograman Web**.
+DIRKA (Direktori Kantin) adalah aplikasi web fullstack yang dirancang untuk membantu civitas akademika UPNVJ dalam mencari referensi kuliner di lingkungan kampus (Pondok Labu & Limo).
 
-Aplikasi ini memungkinkan pengguna untuk:
-
-* Melihat daftar kantin dan toko di dalamnya.
-* Menjelajahi menu serta harga di setiap toko.
-* Memberikan vote satu kali per toko.
-* Melakukan pencarian toko atau menu secara real time.
+## ✨ Fitur Unggulan
+* **Direktori Lengkap**: Menampilkan daftar kantin beserta foto dan lokasinya.Web Server seperti **XAMPP**, **MAMP**, atau setara.
+* **Smart Voting**: Sistem vote harian (1 vote per toko/hari) untuk menentukan kantin terpopuler.
+* **Ulasan & Komentar**: User dapat memberikan ulasan, mengedit, dan menghapus komentar mereka sendiri.
+* **Pencarian & Sorting**: Cari toko/menu secara real-time dan urutkan berdasarkan nama atau popularitas.
+* **Responsif**: Tampilan optimal di Desktop maupun Mobile.
+* **Keamanan**: Validasi input ketat, password hashing, dan login system yang aman.
 
 ---
 
 ## 🚀 Tech Stack
 
-**Frontend**: HTML, CSS, JavaScript (Vanilla JS)
+**Frontend**: HTML5, CSS3 (Custom Variables), JavaScript (Vanilla ES6+)
 
-**Backend**: PHP
+**Backend**: PHP 8 (Native)
 
-**Database**: MySQL
+**Database**: MySQL (Relational DB
+
+**Server**: XAMPP/MAMP (Local Development)
 
 ---
 
 ## 🔧 Prasyarat
 
-Sebelum menjalankan proyek, pastikan Anda memiliki:
+Sebelum menjalankan, pastikan komputer Anda memiliki:
 
 * Web Server seperti **XAMPP**, **MAMP**, atau setara.
 * Browser web: Chrome, Firefox, dan lainnya.
@@ -37,7 +40,7 @@ Sebelum menjalankan proyek, pastikan Anda memiliki:
 
 ## 📦 Instalasi & Konfigurasi
 
-Ikuti langkah-langkah berikut untuk menjalankan proyek secara lokal.
+Ikuti langkah-langkah berikut untuk menjalankan proyek di komputer lokal Anda.
 
 ### 1. Clone Repository
 
@@ -45,18 +48,17 @@ Ikuti langkah-langkah berikut untuk menjalankan proyek secara lokal.
 git clone https://github.com/sayyidrafeed/kantin-upnvj.git
 ```
 
-Atau unduh file ZIP dan ekstrak folder proyek.
-
 ---
 
 ### 2. Pindahkan Folder Proyek
 
-Pindahkan folder `kantin-upnvj` ke dalam direktori **htdocs** milik instalasi XAMPP/MAMP.
+Pindahkan folder kantin-upnvj ke dalam direktori root server lokal Anda:
 
 Contoh path:
 
 * **Windows**: `C:\xampp\htdocs\kantin-upnvj`
 * **macOS**: `/Applications/XAMPP/htdocs/kantin-upnvj`
+* **Linux**: `/var/www/html/kantin-upnvj`
 
 ---
 
@@ -82,7 +84,7 @@ Buka XAMPP/MAMP Control Panel dan jalankan modul berikut:
 2. Buka tab **SQL**.
 3. Buka file `database.sql` dari folder proyek dan salin seluruh isinya.
 4. Tempelkan ke editor SQL phpMyAdmin dan klik **Go**.
-5. Ulangi langkah yang sama untuk file `dummy_data.sql`.
+5. Ulangi langkah yang sama untuk file `data.sql`.
 
 ---
 
@@ -98,12 +100,23 @@ Anda dapat membuat akun baru atau menggunakan data dummy untuk login.
 
 ---
 
-## 📚 Informasi Tambahan
+## Konfirugasi Koneksi
 
-Tugas UAS Pemrograman Web
+Jika Anda menggunakan password database selain default (kosong), edit file:
+`includes/db_connect.php`
+```php
+$username = "root";       
+$password = ""; // Isi sesuai password MySQL Anda
+```
+
+## Tugas UAS Pemrograman Web
 
 **Oleh:**
 * Muhammad Sayyid Rafee' Djamil
 * Rafael Ananta Razid
 * Damar Kusumawardhani
 * Fani Dwi Ariyanti
+
+<p align="center">
+© 2025 DIRKA UPNVJ. All rights reserved.
+</p>
