@@ -17,13 +17,18 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif;
     background-color: var(--light-gray);
     color: var(--text-main);
+}
+
+main.container {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    flex: 1;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .auth-container {
@@ -34,10 +39,11 @@ body {
     width: 100%;
     max-width: 420px;
     text-align: center;
+    margin: auto;
 }
 
 .auth-logo {
-    width: 80px; 
+    width: 80px;
     height: auto;
     margin-bottom: 1rem;
 }
@@ -82,6 +88,11 @@ body {
     box-shadow: 0 0 0 2px rgba(43, 174, 0, 0.2);
 }
 
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
 .auth-button {
     width: 100%;
     padding: 0.85rem;
@@ -97,6 +108,11 @@ body {
 
 .auth-button:hover {
     background-color: var(--light-green);
+}
+
+.auth-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 .auth-link {
@@ -147,6 +163,7 @@ body {
     cursor: pointer;
     font-size: 1.2rem;
     opacity: 0.6;
+    z-index: 10;
 }
 
 .password-requirements {

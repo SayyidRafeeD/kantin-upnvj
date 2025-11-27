@@ -2,7 +2,7 @@
 
 $servername = "localhost";
 $username = "root";       
-$password = "root";
+$password = "123Yesno?";
 $dbname = "db_kantin_upnvj"; 
 
 $conn = new mysqli($servername, $username, $password, $dbname);
