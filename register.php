@@ -4,7 +4,7 @@ if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
-$pageTitle = "Register Akun | Kantin UPNVJ";
+$pageTitle = "Register Akun | DIRKA UPNVJ";
 $errorMessage = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : null;
 
 $errorMap = [

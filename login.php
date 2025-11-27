@@ -4,7 +4,7 @@ if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
-$pageTitle = "Login | Kantin UPNVJ";
+$pageTitle = "Login | DIRKA UPNVJ";
 $successMessage = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : null;
 require 'includes/header.php';
 ?>
